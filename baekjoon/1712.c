@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 
 int main(void)
 {
-	char *input_num;
+	char input_num[100];
 	int	input[3];
 	int	i;
 	int j;
@@ -13,21 +14,37 @@ int main(void)
 
 	i = 0;
 	cnt = 0;
-	j = 0;
+	j = 1;
 	scanf("%[^\n]s", input_num);
-	// input[cnt] = atoi(&input_num[0]);
+	input[0] = atoi(input_num);
 	while (input_num[i])
 	{
-		j = i;
-		while (input_num[j + 1] != ' ' && input_num[j + 1] != '\0')
+		if (input_num[i] == ' ')
 		{
+			input[j] = atoi(&input_num[i]);
 			j++;
 		}
-		input[cnt] = atoi(&input_num[i]);
-		if (input_num[j] != '\0')
-			break ;
-		cnt++;
-		i = j + 1;
+		i++;
 	}
-	printf("%d %d %d\n", input[0], input[1], input[2]);
+	j = 0;
+	cnt = 1;
+	i = (input[0] + (input[1] * cnt) / cnt);
+	if (i < input[0] + (input[1] * cnt + 1) / cnt + 1)
+		return (printf("%d\n", -1));
+	cnt++;
+	while (1)
+	{
+		j = (input[0] + (input[1] * cnt) / cnt);
+		if (i > j)
+		{
+			
+			i = j;
+			cnt++;
+		}
+		else
+		{
+			printf("%d\n", cnt);
+			break ;
+		}
+	}
 }
